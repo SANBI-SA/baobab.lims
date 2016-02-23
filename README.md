@@ -7,7 +7,7 @@ $ docker build -t thobalose/docker-plone-bikalims .
 $ docker run -d -p 8080:8080 --name plone thobalose/docker-plone-bikalims
 ```
 
-#OR
+**or**
 
 **Build and run `docker-plone-bika.lims` using `docker-compose`:**
 ```
