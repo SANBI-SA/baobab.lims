@@ -1,6 +1,10 @@
 # docker-plone-bika.lims
 Bika.lims on Docker
 
+
+![Proxying](http://docs.plone.org/_images/zope_plus_ws.png "Proxying Plone")
+
+
 ## Without nginx proxying
 
 **Build and run `docker-plone-bika.lims` using `docker`:**
