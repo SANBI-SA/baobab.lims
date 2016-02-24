@@ -19,4 +19,8 @@ $ docker-compose up
 
   * [localhost:8080](http://localhost:8080)
 
-**Still to be updated...**
+*For now one has first install bika.lims from `:8080` for NGINX `proxy_pass` to work*
+
+**Upon installation, one can access bikalims from [http://localhost](http://localhost)**
+
+*Still to be updated...*
