@@ -32,8 +32,8 @@ RUN su plone -c "cd Plone-4.3.7-r1-UnifiedInstaller; ./install.sh --target=/usr/
 
 # Comment the second line if you want to test bika.lims.
 #SANBI branch is used by bika.sanbi extension and not work alone!
-RUN su plone -c "git clone https://github.com/rockfruit/bika.lims.git /usr/local/Plone/zeocluster/src/bika.lims" && \
-    su plone -c "cd /usr/local/Plone/zeocluster/src/bika.lims; git checkout -b SANBI"
+RUN su plone -c "git clone https://github.com/bikalabs/bika.lims.git /usr/local/Plone/zeocluster/src/bika.lims"
+    # && \ su plone -c "cd /usr/local/Plone/zeocluster/src/bika.lims; git checkout -b SANBI"
 
 COPY buildout.cfg /usr/local/Plone/zeocluster/buildout.cfg
 
@@ -42,6 +42,8 @@ RUN chown -R plone:plone /usr/local/Plone/zeocluster/buildout.cfg && \
 
 # use supervisor to start Plone with the server.
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+
+RUN ifconfig
 
 EXPOSE 8080
 
