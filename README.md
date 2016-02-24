@@ -1,6 +1,11 @@
 # docker-plone-bika.lims
 Bika.lims on Docker
 
+
+![Proxying](http://docs.plone.org/_images/zope_plus_ws.png "Proxying Plone")
+
+
+
 **Build and run `docker-plone-bika.lims` using `docker`:**
 ```
 $ docker build -t thobalose/docker-plone-bikalims .
