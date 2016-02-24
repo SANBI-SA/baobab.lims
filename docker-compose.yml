@@ -1,3 +1,11 @@
+nginx:
+  restart: always
+  build: ./nginx/
+  ports:
+    - "80:80"
+  links:
+    - bika_lims
+
 bika_lims:
   restart: always
   build: .
