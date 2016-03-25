@@ -1,51 +1,63 @@
-FROM ubuntu:14.04
+FROM python
 
 MAINTAINER Thoba Lose 'thoba@sanbi.ac.za' and Hocine Bendou 'hocine@sanbi.ac.za'
 
-# Add plone user
-RUN mkdir /usr/local/Plone \
- && useradd plone -d /usr/local/Plone -s /bin/bash \
- && chown -R plone:plone /usr/local/Plone
+RUN useradd --system -U -u 500 plone \
+ && mkdir -p /plone /data/filestorage /data/blobstorage \
+ && chown -R plone:plone /plone /data
 
-# Update
-RUN apt-get update --fix-missing -y && \
-    # install the platform's build kit, nginx, and supervisor:
-    apt-get install -y build-essential \
-                       python-dev \
-                       libjpeg-dev \
-                       libxslt-dev \
-                       supervisor \
-                       zlib1g-dev \
-                       wget \
-                       libssl-dev \
-                       gcc git-core libffi-dev libpcre3 libpcre3-dev autoconf libtool pkg-config \
-                       libssl-dev libexpat1-dev libxslt1.1 \
-                       gnuplot libcairo2 libpango1.0-0 libgdk-pixbuf2.0-0
-# Download latest version
-RUN wget --no-check-certificate https://launchpad.net/plone/4.3/4.3.7/+download/Plone-4.3.7-r1-UnifiedInstaller.tgz && \
-    tar -xf Plone-4.3.7-r1-UnifiedInstaller.tgz && \
-    chown -R plone:plone Plone-4.3.7-r1-UnifiedInstaller
+ENV PLONE_MAJOR=4.3
+ENV PLONE_VERSION=4.3.7
+ENV PLONE_MD5=b4ece39a6dda7a72c9084057d8faae4f
 
-RUN su plone -c "cd Plone-4.3.7-r1-UnifiedInstaller; ./install.sh --target=/usr/local/Plone --owner=plone --group=plone --password=bikapwd --build-python zeo" && \
-  rm -rf Plone-4.3.7-r1-UnifiedInstaller.tgz && \
-  rm -rf Plone-4.3.7-r1-UnifiedInstaller
+RUN buildDeps="curl sudo git python-setuptools python-dev build-essential libssl-dev libxml2-dev libxslt1-dev libbz2-dev libjpeg62-turbo-dev" \
+ && runDeps="libxml2 libxslt1.1 libjpeg62" \
+ && apt-get update \
+ && apt-get install -y --no-install-recommends $buildDeps \
+ && curl -o Plone.tgz -SL https://launchpad.net/plone/$PLONE_MAJOR/$PLONE_VERSION/+download/Plone-$PLONE_VERSION-UnifiedInstaller.tgz \
+ && echo "$PLONE_MD5 Plone.tgz" | md5sum -c - \
+ && tar -xzf Plone.tgz \
+ && ./Plone-$PLONE_VERSION-UnifiedInstaller/install.sh \
+      --password=admin \
+      --daemon-user=plone \
+      --owner=plone \
+      --group=plone \
+      --target=/plone \
+      --instance=instance \
+      --var=/data \
+      zeo \
+ && rm -rf Plone*
 
-# Comment the second line if you want to test bika.lims.
-#SANBI branch is used by bika.sanbi extension and not work alone!
-RUN su plone -c "git clone https://github.com/bikalabs/bika.lims.git /usr/local/Plone/zeocluster/src/bika.lims"
-    # && \ su plone -c "cd /usr/local/Plone/zeocluster/src/bika.lims; git checkout -b SANBI"
+RUN git clone https://github.com/hocinebendou/bika.in.docker.git /bika.lims \
+ && git clone https://github.com/hocinebendou/bika.health.git /bika.health
 
-COPY buildout.cfg /usr/local/Plone/zeocluster/buildout.cfg
+RUN git clone https://github.com/rockfruit/bika.sanbi.git /bika.sanbi
 
-RUN chown -R plone:plone /usr/local/Plone/zeocluster/buildout.cfg && \
-    su plone -c "cd /usr/local/Plone/zeocluster; bin/buildout"
+COPY buildout.cfg /plone/instance/buildout.cfg
 
-# use supervisor to start Plone with the server.
-COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+RUN chown -R plone:plone /plone /data /bika.lims /bika.health /bika.sanbi \
+ && cd /plone/instance \
+ && sudo -u plone bin/buildout
+
+#RUN cd /bika.lims && git branch
+#RUN ls /bika.lims/bika/lims/browser
+
+RUN SUDO_FORCE_REMOVE=yes apt-get purge -y --auto-remove $buildDeps \
+ && apt-get install -y --no-install-recommends $runDeps \
+ && rm -rf /var/lib/apt/lists/* \
+ && rm -rf /plone/buildout-cache/downloads/* \
+ && find /plone \( -type f -a -name '*.pyc' -o -name '*.pyo' \) -exec rm -rf '{}' +
+
+VOLUME /data/filestorage /data/blobstorage
+
+COPY docker-initialize.py docker-entrypoint.sh /
+RUN chmod +x /docker-entrypoint.sh
 
 RUN ifconfig
 
 EXPOSE 8080
+USER plone
+WORKDIR /plone/instance
 
-CMD ["/usr/bin/supervisord"]
-
+ENTRYPOINT ["/docker-entrypoint.sh"]
+CMD ["start"]
