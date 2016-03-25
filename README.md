@@ -33,12 +33,14 @@ $ docker-compose build
 $ docker-compose up
 ```
 
-**Access docker-plone-bika.lims at:** 
+## NB
 
-  * [localhost:8080](http://localhost:8080)
+ * **Access docker-plone-bika.lims at:** 
 
-*For now, one has first install bika.lims from `:8080` for NGINX `proxy_pass` to work*
-  * see above `Add new Plone site`
+      * [localhost:8080](http://localhost:8080)
+
+      * For now, one has first install bika.lims from `:8080` for NGINX `proxy_pass` to work*
+      * see above `Add new Plone site`
 
 **Upon installation, one can access bikalims from [http://localhost](http://localhost)**
 
