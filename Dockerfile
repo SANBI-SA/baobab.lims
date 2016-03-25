@@ -1,4 +1,4 @@
-FROM python
+FROM python:2.7
 
 MAINTAINER Thoba Lose 'thoba@sanbi.ac.za' and Hocine Bendou 'hocine@sanbi.ac.za'
 
@@ -26,23 +26,20 @@ RUN buildDeps="curl sudo git python-setuptools python-dev build-essential libssl
       --instance=instance \
       --var=/data \
       zeo \
- && rm -rf Plone*
+ && rm -rf Plone* \
 
-RUN git clone https://github.com/hocinebendou/bika.in.docker.git /bika.lims \
- && git clone https://github.com/hocinebendou/bika.health.git /bika.health
+ && git clone https://github.com/hocinebendou/bika.in.docker.git /bika.lims \
+ && git clone https://github.com/hocinebendou/bika.health.git /bika.health \
 
-RUN git clone https://github.com/rockfruit/bika.sanbi.git /bika.sanbi
+ && git clone https://github.com/rockfruit/bika.sanbi.git /bika.sanbi
 
 COPY buildout.cfg /plone/instance/buildout.cfg
 
 RUN chown -R plone:plone /plone /data /bika.lims /bika.health /bika.sanbi \
  && cd /plone/instance \
- && sudo -u plone bin/buildout
+ && sudo -u plone bin/buildout \
 
-#RUN cd /bika.lims && git branch
-#RUN ls /bika.lims/bika/lims/browser
-
-RUN SUDO_FORCE_REMOVE=yes apt-get purge -y --auto-remove $buildDeps \
+ && SUDO_FORCE_REMOVE=yes apt-get purge -y --auto-remove $buildDeps \
  && apt-get install -y --no-install-recommends $runDeps \
  && rm -rf /var/lib/apt/lists/* \
  && rm -rf /plone/buildout-cache/downloads/* \
@@ -50,14 +47,16 @@ RUN SUDO_FORCE_REMOVE=yes apt-get purge -y --auto-remove $buildDeps \
 
 VOLUME /data/filestorage /data/blobstorage
 
-COPY docker-initialize.py docker-entrypoint.sh /
+COPY docker-entrypoint.sh /docker-entrypoint.sh
+
 RUN chmod +x /docker-entrypoint.sh
 
-RUN ifconfig
-
 EXPOSE 8080
+
 USER plone
+
 WORKDIR /plone/instance
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
+
 CMD ["start"]
