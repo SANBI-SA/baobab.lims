@@ -3,13 +3,13 @@ Bika.lims on Docker
 
 ## Without nginx proxying
 
-**Build and run `docker-plone-bika.lims` using `docker`:**
+**Build and run `docker-bika.lims` using `docker`:**
 ```
-$ docker build -t thobalose/docker-plone-bikalims .
-$ docker run -d -p 8080:8080 --name plone thobalose/docker-plone-bikalims
+$ docker build -t docker-bikalims .
+$ docker run -d -p 8080:8080 --name plone thobalose/docker-bikalims
 ```
 
-**Access docker-plone-bika.lims at:** 
+**Access docker-bika.lims at:** 
 
   * [localhost:8080](http://localhost:8080)
 
@@ -26,7 +26,7 @@ $ docker run -d -p 8080:8080 --name plone thobalose/docker-plone-bikalims
 
 
 
-**Build and run `docker-plone-bika.lims` using `docker-compose`:**
+**Build and run `docker-bika.lims` using `docker-compose`:**
 ```
 $ pip install docker-compose
 $ docker-compose build 
