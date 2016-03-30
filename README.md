@@ -1,4 +1,4 @@
-# docker-plone-bika.lims
+# docker-bika.lims
 Bika.lims on Docker
 
 ## Without nginx proxying
