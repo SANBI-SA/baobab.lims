@@ -6,7 +6,7 @@ Bika.lims on Docker
 **Build and run `docker-bika.lims` using `docker`:**
 ```
 $ docker build -t docker-bikalims .
-$ docker run -d -p 8080:8080 --name plone thobalose/docker-bikalims
+$ docker run -d -p 8080:8080 --name bikalims docker-bikalims
 ```
 
 **Access docker-bika.lims at:** 
