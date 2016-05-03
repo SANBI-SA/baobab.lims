@@ -9,8 +9,6 @@ services:
       - "80:80"
     links:
       - bika_lims
-    depends_on:
-      - bika_plone
 
   bika_plone:
     restart: always
@@ -26,6 +24,4 @@ services:
     ports:
      - "8080:8080"
     links:
-     - bika_plone
-    depends_on:
      - bika_plone
