@@ -29,18 +29,12 @@ RUN buildDeps="curl sudo git python-setuptools python-dev build-essential libssl
  && rm -rf Plone*
 RUN git clone https://github.com/hocinebendou/bika.in.docker.git /bika.lims
 
-#     && git clone https://github.com/hocinebendou/bika.health.git /bika.health \
-
-#     && git clone https://github.com/rockfruit/bika.sanbi.git /bika.sanbi
-
 COPY buildout.cfg /plone/instance/buildout.cfg
 
 RUN chown -R plone:plone /plone /data /bika.lims \
-# /bika.health /bika.sanbi \
  && cd /plone/instance \
  && sudo -u plone bin/buildout
-
- RUN SUDO_FORCE_REMOVE=yes apt-get purge -y --auto-remove $buildDeps \
+ && SUDO_FORCE_REMOVE=yes apt-get purge -y --auto-remove $buildDeps \
  && apt-get install -y --no-install-recommends $runDeps \
  && rm -rf /var/lib/apt/lists/* \
  && rm -rf /plone/buildout-cache/downloads/* \

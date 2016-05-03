@@ -10,13 +10,7 @@ services:
     links:
       - bika_lims
     depends_on:
-      - bika_plone
-
-  bika_plone:
-    restart: always
-    build: ./plone/
-    image: bika_plone
-    container_name: bika_plone
+      - bika_lims
 
   bika_lims:
     restart: always
@@ -25,7 +19,4 @@ services:
     container_name: bika_lims
     ports:
      - "8080:8080"
-    links:
-     - bika_plone
-    depends_on:
-     - bika_plone
+
