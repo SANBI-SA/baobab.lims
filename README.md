@@ -4,14 +4,16 @@ Bika.lims on Docker
 ## Without nginx proxying
 
 **Build and run `docker-bika.biobank` using `docker`:**
+
 ```
 $ docker build -t bika.biobank .
 $ docker run -d -p 8080:8080 biobank biobank 
 ```
 
-**Access docker-plone-bika.lims at:** 
-      * Select "Add Plone Site", ensure that one of the options listed is checked, then submit the form.
-      * [localhost:8080](http://localhost:8080)
+**Access docker-bika.biobank at:** 
+
+  * Select "Add Plone Site", ensure that one of the options listed is checked, then submit the form.
+  * [localhost:8080](http://localhost:8080)
 
 ## With nginx proxying
 
