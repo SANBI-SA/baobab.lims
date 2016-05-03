@@ -33,7 +33,7 @@ COPY buildout.cfg /plone/instance/buildout.cfg
 
 RUN chown -R plone:plone /plone /data /bika.lims \
  && cd /plone/instance \
- && sudo -u plone bin/buildout
+ && sudo -u plone bin/buildout \
  && SUDO_FORCE_REMOVE=yes apt-get purge -y --auto-remove $buildDeps \
  && apt-get install -y --no-install-recommends $runDeps \
  && rm -rf /var/lib/apt/lists/* \
