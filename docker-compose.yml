@@ -3,8 +3,8 @@ services:
   nginx:
     restart: always
     build: ./nginx/
-    # image: bika_nginx
-    # container_name: bika_nginx
+    image: bika_nginx
+    container_name: bika_nginx
     ports:
       - "80:80"
     links:
@@ -15,14 +15,14 @@ services:
   bika_plone:
     restart: always
     build: ./plone/
-    # image: bika_plone
+    image: bika_plone
     container_name: bika_plone
 
   bika_lims:
     restart: always
     build: .
-    # image: bika_lims
-    # container_name: bika_lims
+    image: bika_lims
+    container_name: bika_lims
     ports:
      - "8080:8080"
     links:
