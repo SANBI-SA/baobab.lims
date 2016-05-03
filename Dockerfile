@@ -1,5 +1,5 @@
-# FROM python:2.7
-FROM bika_plone
+FROM python:2.7
+# FROM bika_plone
 
 MAINTAINER Thoba Lose 'thoba@sanbi.ac.za' and Hocine Bendou 'hocine@sanbi.ac.za'
 
