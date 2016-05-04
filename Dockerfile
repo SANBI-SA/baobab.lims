@@ -27,7 +27,8 @@ RUN buildDeps="curl sudo git python-setuptools python-dev build-essential libssl
       --var=/data \
       zeo \
  && rm -rf Plone*
-RUN git clone https://github.com/hocinebendou/bika.in.docker.git /bika.lims
+
+RUN git clone https://github.com/bikalabs/bika.health.git /bika.lims
 
 COPY buildout.cfg /plone/instance/buildout.cfg
 

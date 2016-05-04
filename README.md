@@ -1,11 +1,10 @@
 # docker-bika.biobank
-Bika.lims on Docker
+Bika.biobank on Docker
 
-**Build and run `docker-bika.biobank` using `docker`:**
+**Run `docker-bika.biobank` using the `docker engine`:**
 
 ```
 $ docker pull bibbox/bika.biobank 
-$ docker build -t biobank .
 $ docker run -d -p 8080:8080 biobank biobank 
 ```
 
