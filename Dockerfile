@@ -30,13 +30,11 @@ RUN buildDeps="curl sudo git python-setuptools python-dev build-essential libssl
 
 RUN git clone https://github.com/hocinebendou/bika.gsoc.git /bika.lims \
 
-     && git clone https://github.com/hocinebendou/bika.health.git /bika.health \
-
      && git clone https://github.com/rockfruit/bika.sanbi.git /bika.sanbi
 
 COPY buildout.cfg /plone/instance/buildout.cfg
 
-RUN chown -R plone:plone /plone /data /bika.lims /bika.health /bika.sanbi \
+RUN chown -R plone:plone /plone /data /bika.lims /bika.sanbi \
  && cd /plone/instance \
  && sudo -u plone bin/buildout \
  && SUDO_FORCE_REMOVE=yes apt-get purge -y --auto-remove $buildDeps \
