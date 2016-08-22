@@ -28,7 +28,7 @@ RUN buildDeps="curl sudo git python-setuptools python-dev build-essential libssl
       zeo \
  && rm -rf Plone*
 
-RUN git clone https://github.com/bikalabs/bika.lims.git /bika.lims \
+RUN git clone -b storage https://github.com/bikalabs/bika.lims.git /bika.lims \
 
      && git clone https://github.com/rockfruit/bika.sanbi.git /bika.sanbi
 
