@@ -27,15 +27,13 @@ MAINTAINER Thoba Lose 'thoba@sanbi.ac.za' and Hocine Bendou 'hocine@sanbi.ac.za'
 #       --var=/data \
 #       zeo \
 #  && rm -rf Plone* \
-RUN git clone https://github.com/hocinebendou/bika.in.docker.git /bika.lims \
+RUN git clone https://github.com/hocinebendou/b3a.biobank.git /bika.lims \
 
-     && git clone https://github.com/hocinebendou/bika.health.git /bika.health \
-
-     && git clone https://github.com/rockfruit/bika.sanbi.git /bika.sanbi
+     && git clone https://github.com/hocinebendou/baobab.lims.git /bika.sanbi
 
 COPY buildout.cfg /plone/instance/buildout.cfg
 
-RUN chown -R plone:plone /plone /data /bika.lims /bika.health /bika.sanbi \
+RUN chown -R plone:plone /plone /data /bika.lims /bika.sanbi \
  && cd /plone/instance \
  && sudo -u plone bin/buildout
 
