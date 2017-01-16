@@ -28,9 +28,9 @@ RUN buildDeps="curl sudo git python-setuptools python-dev build-essential libssl
       zeo \
  && rm -rf Plone*
 
-RUN git clone -b inventory https://github.com/bikalabs/bika.lims.git /bika.lims \
+RUN git clone -b inventory https://github.com/hocinebendou/b3a.biobank.git /bika.lims \
 
-     && git clone https://github.com/rockfruit/bika.sanbi.git /bika.sanbi
+     && git clone https://github.com/hocinebendou/baobab.lims.git /bika.sanbi
 
 COPY buildout.cfg /plone/instance/buildout.cfg
 
