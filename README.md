@@ -1,13 +1,13 @@
-# docker-bika.biobank
-Bika.biobank on Docker
+# baobab.lims
+Baobab.lims on Docker
 
-**Run `docker-bika.biobank` using the `docker engine`:**
+**Run `baobab.lims` using the `docker engine`:**
 
 ```
-$ docker pull bibbox/bika.biobank 
-$ docker run -d -p 8080:8080 biobank biobank 
+$ docker pull sanbi/baobab.lims 
+$ docker run -d -p 8080:8080 baobab baobab 
 ```
 
-Access docker-bika.biobank at [localhost:8080](http://localhost:8080).
+Access baobab.lims at [localhost:8080](http://localhost:8080).
 
  
