@@ -1,5 +1,5 @@
-# docker-bika.lims
-Bika.lims on Docker
+# baobab.lims
+Baobab.lims on Docker
 
 ## With nginx proxying
 
