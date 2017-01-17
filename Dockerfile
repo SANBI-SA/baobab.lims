@@ -31,17 +31,19 @@ RUN buildDeps="curl sudo git python-setuptools python-dev build-essential libssl
 RUN git clone https://github.com/hocinebendou/b3a.biobank.git /bika.lims \
 
      && git clone https://github.com/hocinebendou/baobab.lims.git /bika.sanbi
+     
+RUN ls /
 
 COPY buildout.cfg /plone/instance/buildout.cfg
 
-RUN chown -R plone:plone /plone /data /bika.lims /bika.sanbi \
- && cd /plone/instance \
- && sudo -u plone bin/buildout \
- && SUDO_FORCE_REMOVE=yes apt-get purge -y --auto-remove $buildDeps \
- && apt-get install -y --no-install-recommends $runDeps \
- && rm -rf /var/lib/apt/lists/* \
- && rm -rf /plone/buildout-cache/downloads/* \
- && find /plone \( -type f -a -name '*.pyc' -o -name '*.pyo' \) -exec rm -rf '{}' +
+RUN chown -R plone:plone /plone /data /bika.lims /bika.sanbi
+RUN cd /plone/instance 
+RUN sudo -u plone bin/buildout 
+RUN SUDO_FORCE_REMOVE=yes apt-get purge -y --auto-remove $buildDeps 
+RUN apt-get install -y --no-install-recommends $runDeps 
+RUN rm -rf /var/lib/apt/lists/* 
+RUN rm -rf /plone/buildout-cache/downloads/* 
+RUN find /plone \( -type f -a -name '*.pyc' -o -name '*.pyo' \) -exec rm -rf '{}' +
 
 VOLUME /data/filestorage /data/blobstorage
 
