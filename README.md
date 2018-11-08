@@ -1,5 +1,9 @@
+|![](https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Warning.svg/156px-Warning.svg.png) | This repository (`SANBI-SA/baobab.lims.docker`) is no longer developed or maintained.<br />**Baobab LIMS** is being actively developed and maintained at [BaobabLims](https://github.com/BaobabLims/baobab.lims). |
+|---|---|
+
 # baobab.lims
 Baobab.lims on Docker
+
 
 ## With nginx proxying
 
