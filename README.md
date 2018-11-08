@@ -1,35 +1,23 @@
-|![](https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Warning.svg/156px-Warning.svg.png) | This repository (`SANBI-SA/baobab.lims.docker`) is no longer developed or maintained.<br />**Baobab LIMS** is being actively developed and maintained at [BaobabLims](https://github.com/BaobabLims/baobab.lims). |
-|---|---|
+# Baobab LIMS
 
-# baobab.lims
-Baobab.lims on Docker
-
-
-## With nginx proxying
+| ![](https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Warning.svg/156px-Warning.svg.png) | This repository (`SANBI-SA/baobab.lims.docker`) is no longer developed or maintained.<br />**Baobab LIMS** is being actively developed and maintained at [BaobabLims](https://github.com/BaobabLims/baobab.lims). |
+| ------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
 
-![Proxying](http://docs.plone.org/_images/zope_plus_ws.png "Proxying Plone")
+**Build and run Baobab LIMS using `docker-compose`:**
 
-
-
-**Build and run `docker-bika.lims` using `docker-compose`:**
-```
+```sh
 $ pip install docker-compose
-$ docker-compose build 
+...
+$ git clone https://github.com/SANBI-SA/baobab-lims-docker.git
+$ cd baobab-lims-docker
 $ docker-compose up
 ```
 
-## NB
+**Access Baobab LIMS on [localhost:8080](http://localhost:8080):**
 
- * **Access docker-plone-bika.lims at:** 
+- Click on `Install a Baobab distribution`.
+- Check `Baobab LIMS` option, then click `Install` the form.
+- **Authentication: `admin:adminsecret`**
 
-      * [localhost:8080](http://localhost:8080)
-
-      **Add a new Plone site**
-
-      * Select "Add Plone Site", ensure that one of the options listed is checked, then submit the form.
-      * For now, one has first install bika.lims from `:8080` for NGINX `proxy_pass` to work*
-
-**Upon installation, one can access bikalims from [http://localhost](http://localhost)**
-
-*Still to be updated...*
+We have also added an NGINX proxy in the compose file. So, upon installation one can head to [http://localhost](http://localhost) to access the Baobab installation.
